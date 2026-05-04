@@ -12,7 +12,7 @@ const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
         user: 'voeuy63@gmail.com',
-        pass: 'qejzixuqvfznibby' // App Password 16 ខ្ទង់របស់អ្នក
+        pass: 'qejzixuqvfznibby' 
     }
 });
 
@@ -27,12 +27,13 @@ app.post('/send-otp', (req, res) => {
         from: '"ForestSMP" <voeuy63@gmail.com>',
         to: email,
         subject: 'ForestSMP Verification Code',
-        text: `Hello!\nThis is the code to enter to confirm the code.\n\nYour code (otp): ${otp}`
+        text: `Hello!\nYour verification code is: ${otp}`
     };
 
     transporter.sendMail(mailOptions, (error, info) => {
         if (error) return res.status(500).send("Error: " + error.message);
-        res.status(200).send("OTP code has been sent!");
+        // ប្តូរអត្ថបទឆ្លើយតបនៅទីនេះ
+        res.status(200).send("Code OTP send to your email"); 
     });
 });
 
@@ -47,4 +48,4 @@ app.post('/verify-otp', (req, res) => {
 });
 
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
